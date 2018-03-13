@@ -58,7 +58,6 @@
             developing maven plugins using annotations (see Maven issue MNG-5346).
         -->
         <maven.version.minimum>3.2.2</maven.version.minimum>
-        <origin>git@github.com:schroenser/parent-pom.git</origin>
         <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
     </properties>
@@ -80,22 +79,6 @@
                         <expandEmptyElements>false</expandEmptyElements>
                         <keepBlankLines>true</keepBlankLines>
                         <nrOfIndentSpace>4</nrOfIndentSpace>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>external.atlassian.jgitflow</groupId>
-                    <artifactId>jgitflow-maven-plugin</artifactId>
-                    <version>1.0-m5.1</version>
-                    <configuration>
-                        <autoVersionSubmodules>true</autoVersionSubmodules>
-                        <defaultOriginUrl>${origin}</defaultOriginUrl>
-                        <pushReleases>true</pushReleases>
-                        <pushHotfixes>true</pushHotfixes>
-                        <!-- Note that the comment prefix below ends in a non-breaking space because jgitflow trims the value -->
-                        <scmCommentPrefix>[jgitflow]</scmCommentPrefix>
-                        <noReleaseBuild>true</noReleaseBuild>
-                        <noHotfixBuild>true</noHotfixBuild>
-                        <noDeploy>true</noDeploy>
                     </configuration>
                 </plugin>
                 <plugin>
