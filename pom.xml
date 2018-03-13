@@ -37,8 +37,8 @@
     </prerequisites>
 
     <scm>
-        <connection>scm:git:git@github.com:schroenser/parent-pom.git</connection>
-        <developerConnection>scm:git:git@github.com:schroenser/parent-pom.git</developerConnection>
+        <connection>scm:git:git://github.com/schroenser/parent-pom.git</connection>
+        <developerConnection>scm:git:ssh://github.com/schroenser/parent-pom.git</developerConnection>
         <url>https://github.com/schroenser/parent-pom</url>
     </scm>
 
