@@ -1,7 +1,7 @@
 language: java
 
 install: true
-script: "wget -q -O - https://raw.githubusercontent.com/mizool/travis-ci-maven-gitflow/feature/create-initial-files-and-documentation/build.sh | bash"
+script: "wget -q -O - https://raw.githubusercontent.com/mizool/travis-ci-maven-gitflow/release/build.sh | bash"
 
 cache:
   directories:
