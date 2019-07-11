@@ -112,7 +112,6 @@
                     <configuration>
                         <rules>
                             <requirePluginVersions />
-                            <dependencyConvergence />
                             <requireMavenVersion>
                                 <version>${maven.version.minimum}</version>
                             </requireMavenVersion>
