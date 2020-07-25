@@ -4,7 +4,7 @@
 
     <groupId>de.schroenser</groupId>
     <artifactId>parent-pom</artifactId>
-    <version>7</version>
+    <version>8</version>
     <packaging>pom</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -71,6 +71,9 @@
                     <version>1.14.0</version>
                     <configuration>
                         <commitDevelopmentVersionAtStart>true</commitDevelopmentVersionAtStart>
+                        <useSnapshotInRelease>true</useSnapshotInRelease>
+                        <preReleaseGoals>package -DperformRelease=true</preReleaseGoals>
+                        <commitMessagePrefix>[gitflow]</commitMessagePrefix>
                     </configuration>
                 </plugin>
                 <plugin>
