@@ -47,4 +47,4 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
       - name: Verify
-        run: mvn --batch-mode --update-snapshots verify
+        run: mvn -B -U verify -DperformRelease=true
