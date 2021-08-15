@@ -20,6 +20,10 @@ jobs:
         with:
           java-version: '8'
           distribution: 'adopt'
+      - name: echo $JAVA_HOME
+        shell: bash
+        run: |
+          echo $JAVA_HOME
       - name: Set up Toolchain
         shell: bash
         run: |
@@ -39,5 +43,9 @@ jobs:
             </toolchain>
           </toolchains>
           EOF
+      - name: cat toolchains.xml
+        shell: bash
+        run: |
+          cat $HOME/.m2/toolchains.xml
       - name: Verify
         run: mvn --batch-mode --update-snapshots verify
