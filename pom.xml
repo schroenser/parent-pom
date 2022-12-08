@@ -76,7 +76,7 @@
                     <configuration>
                         <commitDevelopmentVersionAtStart>true</commitDevelopmentVersionAtStart>
                         <useSnapshotInRelease>true</useSnapshotInRelease>
-                        <preReleaseGoals>package -DperformRelease=true</preReleaseGoals>
+                        <skipTestProject>true</skipTestProject>
                         <commitMessagePrefix>[gitflow]</commitMessagePrefix>
                     </configuration>
                 </plugin>
