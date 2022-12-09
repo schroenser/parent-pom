@@ -4,7 +4,7 @@
 
     <groupId>de.schroenser</groupId>
     <artifactId>parent-pom</artifactId>
-    <version>11</version>
+    <version>12</version>
     <packaging>pom</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -25,16 +25,6 @@
             <email>schroenser@gmail.com</email>
         </developer>
     </developers>
-
-    <prerequisites>
-        <!--
-            This Maven version is used for versions:display-plugin-updates only. Maven does not check this value during
-            the build. For that, refer to the maven enforcer plugin configuration.
-
-            See http://jira.codehaus.org/browse/MVERSIONS-272 for more details.
-        -->
-        <maven>${maven.version.minimum}</maven>
-    </prerequisites>
 
     <scm>
         <connection>scm:git:git://github.com/schroenser/parent-pom.git</connection>
@@ -120,6 +110,26 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>3.0.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>3.1.0</version>
+                    <executions>
+                        <execution>
+                            <id>enforce-maven</id>
+                            <goals>
+                                <goal>enforce</goal>
+                            </goals>
+                            <configuration>
+                                <rules>
+                                    <requireMavenVersion>
+                                        <version>3.8.6</version>
+                                    </requireMavenVersion>
+                                </rules>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -243,6 +253,10 @@
                         <phase>validate</phase>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
