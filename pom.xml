@@ -45,7 +45,7 @@
 
     <properties>
         <encoding>UTF-8</encoding>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
 
         <!--
             Maven 3.2.2 fixed the annoying "No mojo definitions found" error when
