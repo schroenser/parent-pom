@@ -24,5 +24,9 @@ jobs:
         with:
           java-version: '21'
           distribution: 'corretto'
+          gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
       - name: Maven verify
         run: mvn -B -U verify -DperformRelease=true
+        env:
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
