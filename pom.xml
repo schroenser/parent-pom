@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.schroenser</groupId>
     <artifactId>parent-pom</artifactId>
-    <version>14</version>
+    <version>15</version>
     <packaging>pom</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
-    <description>Pom that takes care of configurations and versions that I want to be common across all my projects.</description>
+    <description>Pom that takes care of configurations and versions that I want to be common across all my projects.
+    </description>
     <url>https://github.com/schroenser/parent-pom</url>
 
     <licenses>
@@ -26,32 +28,26 @@
         </developer>
     </developers>
 
+    <prerequisites>
+        <!--
+            This Maven version is used for versions:display-plugin-updates only. Maven does not check this value during
+            the build. For that, refer to the maven enforcer plugin configuration.
+
+            See http://jira.codehaus.org/browse/MVERSIONS-272 for more details.
+        -->
+        <maven>${maven.version.minimum}</maven>
+    </prerequisites>
+
     <scm>
         <connection>scm:git:git://github.com/schroenser/parent-pom.git</connection>
         <developerConnection>scm:git:ssh://github.com/schroenser/parent-pom.git</developerConnection>
         <url>https://github.com/schroenser/parent-pom</url>
     </scm>
 
-    <distributionManagement>
-        <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-        </repository>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
-
     <properties>
         <encoding>UTF-8</encoding>
-        <java.version>17</java.version>
-
-        <!--
-            Maven 3.2.2 fixed the annoying "No mojo definitions found" error when
-            developing maven plugins using annotations (see Maven issue MNG-5346).
-        -->
-        <maven.version.minimum>3.2.2</maven.version.minimum>
+        <java.version>21</java.version>
+        <maven.version.minimum>3.6.3</maven.version.minimum>
         <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
     </properties>
@@ -62,22 +58,27 @@
                 <plugin>
                     <groupId>com.amashchenko.maven.plugin</groupId>
                     <artifactId>gitflow-maven-plugin</artifactId>
-                    <version>1.19.0</version>
+                    <version>1.21.0</version>
                     <configuration>
                         <commitDevelopmentVersionAtStart>true</commitDevelopmentVersionAtStart>
-                        <useSnapshotInRelease>true</useSnapshotInRelease>
+                        <?SORTPOM IGNORE?>
+                        <commitMessagePrefix>[gitflow] </commitMessagePrefix>
+                        <?SORTPOM RESUME?>
+                        <pushRemote>true</pushRemote>
                         <skipTestProject>true</skipTestProject>
-                        <commitMessagePrefix>[gitflow]</commitMessagePrefix>
+                        <useSnapshotInHotfix>true</useSnapshotInHotfix>
+                        <useSnapshotInRelease>true</useSnapshotInRelease>
                     </configuration>
                 </plugin>
                 <plugin>
                     <groupId>com.github.ekryd.sortpom</groupId>
                     <artifactId>sortpom-maven-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>4.0.0</version>
                     <configuration>
                         <encoding>${project.build.sourceEncoding}</encoding>
                         <predefinedSortOrder>recommended_2008_06</predefinedSortOrder>
                         <sortDependencies>groupId,artifactId</sortDependencies>
+                        <sortModules>true</sortModules>
                         <sortPlugins>groupId,artifactId</sortPlugins>
                         <sortProperties>true</sortProperties>
                         <createBackupFile>false</createBackupFile>
@@ -90,12 +91,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-clean-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.4.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.10.1</version>
+                    <version>3.14.0</version>
                     <configuration>
                         <source>${java.version}</source>
                         <target>${java.version}</target>
@@ -104,27 +105,28 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.4.0</version>
+                    <version>3.8.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>3.0.0</version>
+                    <version>3.1.4</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>3.1.0</version>
+                    <version>3.5.0</version>
                     <executions>
                         <execution>
-                            <id>enforce-maven</id>
+                            <id>enforce</id>
                             <goals>
                                 <goal>enforce</goal>
                             </goals>
                             <configuration>
                                 <rules>
+                                    <requirePluginVersions/>
                                     <requireMavenVersion>
-                                        <version>3.8.6</version>
+                                        <version>${maven.version.minimum}</version>
                                     </requireMavenVersion>
                                 </rules>
                             </configuration>
@@ -133,20 +135,44 @@
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>3.2.7</version>
+                    <configuration>
+                        <gpgArguments>
+                            <arg>--pinentry-mode</arg>
+                            <arg>loopback</arg>
+                        </gpgArguments>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>sign</id>
+                            <goals>
+                                <goal>sign</goal>
+                            </goals>
+                            <phase>verify</phase>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-install-plugin</artifactId>
-                    <version>3.1.0</version>
+                    <version>3.1.4</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.4.2</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.4.1</version>
+                    <version>3.11.2</version>
+                    <configuration>
+                        <doclint>none</doclint>
+                    </configuration>
                     <executions>
                         <execution>
+                            <id>jar</id>
                             <goals>
                                 <goal>jar</goal>
                             </goals>
@@ -156,7 +182,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.3.1</version>
                     <configuration>
                         <encoding>${encoding}</encoding>
                     </configuration>
@@ -164,39 +190,31 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>4.0.0-M4</version>
+                    <version>3.21.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>3.2.1</version>
+                    <version>3.3.1</version>
                     <executions>
-                        <!--
-                            This is a workaround for https://issues.apache.org/jira/browse/MNG-5939.
-                            Configuring the jar-no-fork goal within the execution "attach-sources" would result in
-                            both jar and jar-no-fork being active on the release profile.
-                        -->
                         <execution>
-                            <id>attach-sources</id>
-                            <phase/>
-                        </execution>
-                        <execution>
-                            <id>always-attach-sources</id>
+                            <id>jar-no-fork</id>
                             <goals>
                                 <goal>jar-no-fork</goal>
                             </goals>
+                            <phase>verify</phase>
                         </execution>
                     </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0-M7</version>
+                    <version>3.5.3</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-toolchains-plugin</artifactId>
-                    <version>3.1.0</version>
+                    <version>3.2.0</version>
                     <configuration>
                         <toolchains>
                             <jdk>
@@ -206,6 +224,7 @@
                     </configuration>
                     <executions>
                         <execution>
+                            <id>toolchain</id>
                             <goals>
                                 <goal>toolchain</goal>
                             </goals>
@@ -213,26 +232,30 @@
                     </executions>
                 </plugin>
                 <plugin>
-                    <groupId>org.simplify4u.plugins</groupId>
-                    <artifactId>sign-maven-plugin</artifactId>
-                    <version>1.0.1</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>sign</goal>
-                            </goals>
-                        </execution>
-                    </executions>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>2.18.0</version>
+                    <configuration>
+                        <outputLineWidth>150</outputLineWidth>
+                        <processDependencyManagementTransitive>false</processDependencyManagementTransitive>
+                        <ruleSet>
+                            <ignoreVersion>
+                                <type>regex</type>
+                                <version>(?i).*\W(?:M\d+|beta)\W*.*</version>
+                            </ignoreVersion>
+                        </ruleSet>
+                    </configuration>
                 </plugin>
                 <plugin>
-                    <groupId>org.sonatype.plugins</groupId>
-                    <artifactId>nexus-staging-maven-plugin</artifactId>
-                    <version>1.6.13</version>
+                    <groupId>org.sonatype.central</groupId>
+                    <artifactId>central-publishing-maven-plugin</artifactId>
+                    <version>0.7.0</version>
                     <extensions>true</extensions>
                     <configuration>
-                        <serverId>ossrh</serverId>
-                        <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                        <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        <publishingServerId>central</publishingServerId>
+                        <tokenAuth>true</tokenAuth>
+                        <autoPublish>true</autoPublish>
+                        <waitUntil>published</waitUntil>
                     </configuration>
                 </plugin>
             </plugins>
@@ -247,6 +270,7 @@
                 </configuration>
                 <executions>
                     <execution>
+                        <id>verify</id>
                         <goals>
                             <goal>verify</goal>
                         </goals>
@@ -257,6 +281,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -271,12 +299,8 @@
                 <artifactId>maven-toolchains-plugin</artifactId>
             </plugin>
             <plugin>
-                <groupId>org.simplify4u.plugins</groupId>
-                <artifactId>sign-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
