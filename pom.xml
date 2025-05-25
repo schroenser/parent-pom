@@ -5,7 +5,7 @@
 
     <groupId>de.schroenser</groupId>
     <artifactId>parent-pom</artifactId>
-    <version>15</version>
+    <version>16</version>
     <packaging>pom</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -64,6 +64,9 @@
                         <?SORTPOM IGNORE?>
                         <commitMessagePrefix>[gitflow] </commitMessagePrefix>
                         <?SORTPOM RESUME?>
+                        <gitFlowConfig>
+                            <productionBranch>main</productionBranch>
+                        </gitFlowConfig>
                         <pushRemote>true</pushRemote>
                         <skipTestProject>true</skipTestProject>
                         <useSnapshotInHotfix>true</useSnapshotInHotfix>
