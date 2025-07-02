@@ -5,7 +5,7 @@
 
     <groupId>de.schroenser</groupId>
     <artifactId>parent-pom</artifactId>
-    <version>17</version>
+    <version>18</version>
     <packaging>pom</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -118,7 +118,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>3.5.0</version>
+                    <version>3.6.0</version>
                     <executions>
                         <execution>
                             <id>enforce</id>
@@ -139,7 +139,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-gpg-plugin</artifactId>
-                    <version>3.2.7</version>
+                    <version>3.2.8</version>
                     <configuration>
                         <gpgArguments>
                             <arg>--pinentry-mode</arg>
@@ -152,7 +152,7 @@
                             <goals>
                                 <goal>sign</goal>
                             </goals>
-                            <phase>verify</phase>
+                            <phase>deploy</phase>
                         </execution>
                     </executions>
                 </plugin>
@@ -252,7 +252,7 @@
                 <plugin>
                     <groupId>org.sonatype.central</groupId>
                     <artifactId>central-publishing-maven-plugin</artifactId>
-                    <version>0.7.0</version>
+                    <version>0.8.0</version>
                     <extensions>true</extensions>
                     <configuration>
                         <publishingServerId>central</publishingServerId>
