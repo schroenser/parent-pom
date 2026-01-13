@@ -21,7 +21,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@main
         with:
-          java-version: '21'
+          java-version: '25'
           distribution: 'corretto'
       - name: Maven verify
         run: mvn -B -U -DperformRelease=true verify
