@@ -5,7 +5,7 @@
 
     <groupId>de.schroenser</groupId>
     <artifactId>parent-pom</artifactId>
-    <version>25</version>
+    <version>26</version>
     <packaging>pom</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -99,7 +99,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.15.0</version>
+                    <version>3.16.0</version>
                     <configuration>
                         <source>${java.version}</source>
                         <target>${java.version}</target>
