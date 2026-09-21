@@ -1,0 +1,12 @@
+{
+  "$schema": "https://raw.githubusercontent.com/devcontainers/spec/refs/heads/main/schemas/devContainer.schema.json",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "runArgs": [
+    "--userns=keep-id",
+    "--security-opt", "label=disable"
+  ],
+  "features": {
+    "ghcr.io/devcontainers-extra/features/maven-sdkman:2": {}
+  },
+  "postCreateCommand": "./.devcontainer/postCreateCommand.sh"
+}
