@@ -1,0 +1,9 @@
+{
+  "features": {
+    "ghcr.io/devcontainers-extra/features/maven-sdkman:2": {
+      "version": "2.0.16",
+      "resolved": "ghcr.io/devcontainers-extra/features/maven-sdkman@sha256:ae6a3972c375192903edee5d42a9be35e4fdd1971fad992906f3854250060f4d",
+      "integrity": "sha256:ae6a3972c375192903edee5d42a9be35e4fdd1971fad992906f3854250060f4d"
+    }
+  }
+}
